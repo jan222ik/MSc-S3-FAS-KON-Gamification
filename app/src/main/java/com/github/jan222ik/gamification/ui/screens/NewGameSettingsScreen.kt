@@ -3,24 +3,16 @@ package com.github.jan222ik.gamification.ui.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.github.jan222ik.gamification.importer.CSVImporter
 import com.github.jan222ik.gamification.ui.logic.Game
-
-@Composable
-fun Game() {
-    val game = rememberSaveable() {
-        mutableStateOf<Game?>(null)
-    }
-    when (val g = game.value) {
-        null -> NewGameSettings(onNextGame = { game.value = it })
-        else -> RunningGame(g)
-    }
-}
 
 @Composable
 fun NewGameSettings(onNextGame: (Game) -> Unit) {
@@ -55,20 +47,21 @@ fun SelectPlayerCount(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "New Game",
+            text = "Neues Spiel",
             color = MaterialTheme.colorScheme.tertiary,
             style = MaterialTheme.typography.headlineMedium
         )
-        var playerCount by rememberSaveable { mutableStateOf(2) }
+        var playerCount by rememberSaveable { mutableStateOf(3) }
         Column(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Select Amount of players!")
+            Text(text = "Wähle die Anzahl der Spieler!")
             Row(
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                2.rangeTo(6).forEach {
+                3.rangeTo(6).forEach {
                     Button(
                         enabled = it != playerCount,
                         colors = ButtonDefaults.buttonColors(
@@ -89,19 +82,8 @@ fun SelectPlayerCount(
                 onPlayerCountSelected.invoke(playerCount)
             },
             text = {
-                Text(text = "Start Game with $playerCount players")
+                Text(text = "Spiel mit $playerCount Spielern starten")
             }
         )
     }
 }
-
-@Composable
-fun RunningGame(game: Game) {
-    val player = remember(game.playerIdx) {
-        game.activePlayers[game.playerIdx]
-    }
-    Column() {
-        Text(text = "Current Players: ${player.name}")
-    }
-}
-
