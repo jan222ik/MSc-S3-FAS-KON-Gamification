@@ -231,7 +231,6 @@ fun ColumnScope.eval(game: Game) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ColumnScope.SingeRoundEval(roundHistory: RoundHistory, nextRound: (() -> Unit)?) {
-    println(roundHistory)
     val count = roundHistory.effects.size + 1
     val pagerState = rememberPagerState()
     HorizontalPager(
@@ -567,7 +566,10 @@ fun PCard(playedCard: PlayedCard) {
                 shape = RoundedCornerShape(16.dp),
                 tonalElevation = 32.dp
             ) {
-                Box(contentAlignment = Alignment.Center) {
+                Box(
+                    modifier = Modifier.padding(8.dp),
+                    contentAlignment = Alignment.Center
+                ) {
                     Text(text = playedCard.data.description)
                 }
             }
