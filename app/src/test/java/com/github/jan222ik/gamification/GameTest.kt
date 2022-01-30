@@ -8,10 +8,19 @@ import org.junit.Assert.*
 import kotlin.math.max
 
 
-class ExampleUnitTest {
+class GameTest {
     @Test
     fun checkImportCSV() {
         CSVImporter.loadCards()
+    }
+
+    @Test
+    fun allCrossEffectPlayable() {
+        val g = Game(3, CSVImporter.loadCards(CSVImporter.cards))
+        g.crossEffectCards.forEach {
+            g.playCard(it, null, true)
+            g.assertCrossCardPlayed(it.id)
+        }
     }
 
     @Test
