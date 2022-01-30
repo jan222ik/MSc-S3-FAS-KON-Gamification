@@ -1,0 +1,6 @@
+id,activateOnCards,effectDelay,effectForReceiver,effectForSender,description,hasReceiver
+1,1,0,-1,0,Playable: ID=1,TRUE
+2,2,0,-2,0,Playable: ID=2,TRUE
+3,3,0,-1,0,Playable: ID=3,FALSE
+4,1,0,-1,0,Cross: If ID=1 is played,FALSE
+4,"2,3",0,-1,0,"Cross: If ID={2,3} are played",FALSE
