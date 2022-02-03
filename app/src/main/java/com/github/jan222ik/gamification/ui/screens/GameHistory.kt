@@ -24,11 +24,21 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ColumnScope.GameHistory(game: Game, nextGame: () -> Unit) {
-    TextButton(
-        modifier = Modifier.align(Alignment.End),
-        onClick = nextGame
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = "Nächstes Spiel")
+        TextButton(
+            onClick = { game.continueGame() }
+        ) {
+            Text(text = "Spiel fortsetzen")
+        }
+        TextButton(
+            onClick = nextGame
+        ) {
+            Text(text = "Nächstes Spiel")
+        }
     }
     val pagerState = rememberPagerState()
     Row(

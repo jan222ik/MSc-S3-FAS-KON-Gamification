@@ -20,7 +20,7 @@ fun ColumnScope.RoundEvaluation(game: Game) {
         TextButton(
             onClick = { game.endGame() }
         ) {
-            Text(text = "Spielende")
+            Text(text = "Historie und Spielende")
         }
     }
     game.historyPerRound[game.round]?.let {

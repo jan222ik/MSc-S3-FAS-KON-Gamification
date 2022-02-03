@@ -31,7 +31,10 @@ fun PlayCardScreen(game: Game) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.CenterHorizontally)
+        horizontalArrangement = Arrangement.spacedBy(
+            space = 8.dp,
+            alignment = Alignment.CenterHorizontally
+        )
     ) {
         Text(text = "Runde: ${game.round.inc()}")
         Text(text = "Spieler:")
@@ -69,10 +72,10 @@ fun PlayCardScreen(game: Game) {
                     hasError = null
                     try {
                         val cardId = it.toIntOrNull()
-                        if (cardId != null) {
-                            selectedCard = game.getCardForID(cardId)
+                        selectedCard = if (cardId != null) {
+                            game.getCardForID(cardId)
                         } else {
-                            selectedCard = null
+                            null
                         }
 
                     } catch (e: GameErrors.NoSuchCard) {

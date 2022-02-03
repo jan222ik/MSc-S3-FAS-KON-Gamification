@@ -16,7 +16,7 @@ class GameTest {
 
     @Test
     fun allCrossEffectPlayable() {
-        val g = Game(3, CSVImporter.loadCards(CSVImporter.cards))
+        val g = Game(3, CSVImporter.loadCards(CSVImporter.cards2))
         g.crossEffectCards.forEach {
             g.playCard(it, null, true)
             g.assertCrossCardPlayed(it.id)

@@ -73,7 +73,9 @@ class Game(
         val listOfEffectForCard = scheduled[effectTargetRound] ?: emptyList()
         scheduled[effectTargetRound] = listOfEffectForCard + playedCard
 
-        checkCrossEffects(recipient)
+        if (!isCrossEffect) {
+            checkCrossEffects(recipient)
+        }
         return playedCard
     }
 
@@ -140,6 +142,10 @@ class Game(
 
     fun endGame() {
         gameState = GameState.HISTORY
+    }
+
+    fun continueGame() {
+        gameState = GameState.ROUND_EVALUATE_EFFECTS
     }
 }
 
