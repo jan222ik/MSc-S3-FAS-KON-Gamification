@@ -29,8 +29,8 @@ object CSVImporter {
                 id = row[id]!!.toInt(),
                 description = row[description]!!,
                 effectDelay = row[effectDelay]!!.toInt(),
-                effectForReceiver = row[effectForReceiver]!!.toInt(),
-                effectForSender= row[effectForSender]!!.toInt(),
+                effectForReceiver = row[effectForReceiver]!!.toInt().times(2),
+                effectForSender= row[effectForSender]!!.toInt().times(2),
                 activateOnCards = row[activateOnCards]!!.replace(" ", "").split(",").map { it.toInt() },
                 hasReceiver = row[hasReceiver].toBoolean()
             )//.also(::println)
